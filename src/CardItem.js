@@ -1,5 +1,6 @@
 import React from 'react';
 import MyContext from './MyContext';
+import './App.css';
 
 const CardItem = (props) => {
   return (
@@ -9,10 +10,10 @@ const CardItem = (props) => {
 					return episodes && episodes.map((episode, i) => (
 					<React.Fragment key={i}>
 						<div className= 'card'>
-							<div className="title">{episode.title}</div>
-							<div className="airdate">{episode.airdate}</div>
+							<h2 className="title">{episode.title}</h2>
+							<h3 className="airdate">{episode.airdate}</h3>
 							<a href={episode.episodeLink}>
-								<img src={episode.image} alt={episode.title} />
+								<img className='image' src={episode.image} alt={episode.title} />
 							</a>
 							<p>{episode.description}</p>
 						</div>

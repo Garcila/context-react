@@ -9,8 +9,9 @@ const Header = () => {
       <React.Fragment>
         <h1 className='title'>
           <img src={context.state.imgurl} alt="ttg"/>
-          <p className='h2Subtitle'>{context.state.subtitle}</p>
-          <button onClick={context.growAYearOlder}>+ 1 Year</button>
+          <p className='h2Subtitle' style={{color: context.state.colorSubtitle}}>{context.state.subtitle}</p>
+          {/* <button onClick={context.changeColorSubtitle}>Change Color</button> */}
+          <input onChange={context.changeColorSubtitle} type="color" name="color" id="color"/>
         </h1>
       </React.Fragment>
     )}
