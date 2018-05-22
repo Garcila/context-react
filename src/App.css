@@ -22,7 +22,7 @@ h3,
 .title,
 .footer {
     text-align: center;
-    background-image: linear-gradient(120deg, #9eeefc 0%, #a6c1ee 100%);
+    background: linear-gradient(120deg, #9eeefc 0%, #a6c1ee 100%);
 }
 
 h1 {

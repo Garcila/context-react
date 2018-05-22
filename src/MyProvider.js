@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import MyContext from './MyContext';
 import logo from './images/TTG.png';
-import result from './Brain';
+import brainResult from './Brain';
 import getRgb from './Helpers';
 
 
 // make provider component
 class MyProvider extends Component {
   state = {
+    rgbSelected: '{red:0,green:0,blue:0}',
     imgurl: logo,
     subtitle: 'Season 2 list of episodes',
-    bodyParagraph: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae vel sapiente, culpa adipisci nesciunt tempora maiores, iure corrupti sit voluptate repudiandae. Illo reiciendis, natus sint placeat quae sunt doloremque nemo!',
+    bodyParagraph: 'Lorem ipsum dolor sit amet',
     episodes: [],
-    colorSubtitle: 'rgb(255,255,255)',
+    colorSubtitle: 'rgb(0,0,0)',
+    hexColor: '#ADD8E6',
   }
+
 
   async componentDidMount() {
     const url = 'https://ttgoapi.herokuapp.com';
@@ -21,25 +24,23 @@ class MyProvider extends Component {
       .then(response => response.json())
       .then(data => this.setState({ episodes: data }));
   }
+
   render() {
+    const { rgbSelected } = this.state;
     return (
       <MyContext.Provider value = {{
         state: this.state,
-        // changeColorSubtitle: () => this.state.colorSubtitle === 'rgb(255,255,255)' ?
-        // changeColorSubtitle: () => result.light > result.dark ?
         changeColorSubtitle: (e) => {
-          console.log(e.target.value);
-          let rgb = getRgb(e.target.value);
-          console.log(rgb);
-          console.log(result(rgb));
-        }
-
-          
-          // this.setState({colorSubtitle: 'rgb(0,0,0)'}) :
-          // this.setState({ colorSubtitle: 'rgb(255,255,255)'})
-        // growAYearOlder: () => this.setState({
-        //   age: this.state.age + 1
-        // })
+          this.setState({hexColor: e.target.value});
+          let selectedColor = getRgb(e.target.value);
+          this.setState({ rgbSelected: selectedColor });
+          let a = brainResult(selectedColor);         
+              if (a.light > a.dark) {
+                this.setState({colorSubtitle: 'rgb(0,0,0)'})
+             } else {
+               this.setState({colorSubtitle: 'rgb(255,255,255)'}) 
+             }
+        },
       }}>
         {this.props.children}
       </MyContext.Provider>
